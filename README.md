@@ -1,31 +1,46 @@
-# Nashua Food Pantry Tracker
+# 🚀 Nashua Community Needs Tracker
 
-I built this script to make it easier for people in Nashua to know exactly what our local food pantries need. Instead of checking multiple websites every time you go to the grocery store, this tool pulls the data into one clean list.
+This is a project I built to help centralize information for food pantries and shelters in Nashua, NH. 
 
-## Why this exists
+Right now, if you want to know what items are actually needed, you have to hunt through a dozen different websites or social media pages. This script handles the "hunting and gathering" for you, pulling everything into one clean report so it's easier to know what to pick up at the grocery store.
 
-Right now, **NSKS** and **Corpus Christi** update their Most Needed lists on different schedules and in different formats. I wanted a way to see all that data in one place without the noise of the rest of the websites.
+---
 
-## What it does
+## 🛠️ How it works
+Web data for nonprofits is usually pretty messy, so I designed this to be a **hybrid tracker** that handles data in three ways:
 
-- Live Scraping: Hits the actual donation pages for both pantries to get the latest data.
+* **Static Scraping:** Grabs data from simple HTML pages using `BeautifulSoup`.
+* **Dynamic Scraping:** Uses a "headless" browser (**Playwright**) to load more complex sites that require JavaScript to show their content.
+* **Manual Registry:** For local missions that don't have a website, I built in a contact directory so the user knows exactly who to call.
+* **Smart Cleaning:** I added logic to **deduplicate** items (like recognizing that "1 lb ham" and "One pound ham" are the same thing) to keep the list readable.
 
-- Cleanup: It ignores all the website headers and legal text, focusing only on the food and hygiene items.
+---
 
-- Smart Matching: It handles duplicate items (like if a site lists 1 Pound Ham and One Pound Ham) so the list stays short and readable.
+## 🚀 Getting Started
 
-- Amazon Integration: It flags if a pantry has an active Amazon Wishlist for people who want to donate from home.
+If you want to run this yourself, you'll need to set up the environment and the browser engine first.
 
-## How to use it
-
-- Make sure you have python installed.
-
-- Install the requirements: pip install requests beautifulsoup4
-- Run the script: python nashua_tracker.py
-- The report will print directly to your terminal.
-
-## Current Sources
-- Nashua Soup Kitchen & Shelter (NSKS)
+### 1. Install the Python libraries
+```bash
+pip install playwright requests beautifulsoup4
+```
+### 2. Install the Browser engine
+```bash
+playwright install chromium
+playwright install-deps chromium
+```
+### 📖 Usage
+Once the setup is done, just run the script in your terminal:
+```
+python nashua_tracker.py
+```
+### 📡 Current Sources
+The tracker is currently set up to monitor 15+ organizations including:
+- Nashua Soup Kitchen & Shelter
 - Corpus Christi Food Pantry
+- Salvation Army Nashua
+- End 68 Hours of Hunger
+- Southern NH Rescue Mission
 
-Developed by Anagha Aravind to help coordinate local donations in Nashua, NH.
+Various other local church pantries and missions.
+
